@@ -48,6 +48,7 @@ public class MainProgram {
 		}
 		
 		
+		
 		//123456
 		
 		System.out.println(Test.SwapString("koza"));		
