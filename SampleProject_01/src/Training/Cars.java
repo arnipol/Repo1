@@ -4,7 +4,7 @@ public class Cars {
 	private String name;
 	private Integer power;
 
-	public Cars (String _name, Integer _power)	
+	public Cars (String _name, Integer _power)
 	{
 		name = _name;
 		power = _power;
@@ -16,6 +16,4 @@ public class Cars {
 
 	@Override
 	public String toString() { return getName() + " pwr: " + power; }
-
-	
 }

@@ -8,6 +8,4 @@ public class Test {
 		if (str.isEmpty()) return str;
 		return SwapString(str.substring(1) + str.charAt(0));
 	}
-	
-
 }

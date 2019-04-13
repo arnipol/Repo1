@@ -39,19 +39,18 @@ public class MainProgram {
 		Collections.sort(myList, (x,y)->x.getPower().compareTo(y.getPower()));
 		System.out.println("sorted:");
 		myList.forEach((x)->System.out.println(x.toString()));
-		
-		
+
+		/*
 		Thread[] threads = new Thread[10]; //Runnable[10];
 		for (int i=0; i<10; i++) {
 			threads[i] = new Thread(new MyRun(i));
 			threads[i].start();
-		}
-		
-		
-		
-		//123456
-		
-		System.out.println(Test.SwapString("koza"));		
+		}*/
+
+		JoisonTest jtest = new JoisonTest();
+		jtest.Deserializable();
+
+		//System.out.println(Test.SwapString("koza"));
 
 	}
 }
