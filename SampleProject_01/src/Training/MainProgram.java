@@ -50,7 +50,15 @@ public class MainProgram {
 		JoisonTest jtest = new JoisonTest();
 		jtest.Deserializable();
 
-		//System.out.println(Test.SwapString("koza"));
+		Endomondo endo = new Endomondo();
+		if (endo.Authenticate())
+			System.out.println("autentication successfull");
+		else
+			System.out.println("autentication failed");
+		
+		WorkoutList list = endo.ListWorkouts(30);
+		
+    	list.data.forEach((x)->System.out.println(x.id + "\t" + x.start_time + "\t" + String.format("%.1f",x.speed_kmh_avg)));
 
 	}
 }
