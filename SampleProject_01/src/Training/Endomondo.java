@@ -14,19 +14,32 @@ public class Endomondo {
 	public String DisplayName;
 	public String AuthToken;
 	public String UserId;
+    public String EndomondoAPIUrl;
 
-    final String EndomondoAPIUrl = "https://api.mobile.endomondo.com/mobile";
-	
-    public boolean Authenticate() 
+    public Endomondo () {
+    	Email = new String();
+    	Password = new String();
+    	DisplayName = new String();
+    	AuthToken = new String();
+    	UserId = new String();
+    	EndomondoAPIUrl = "https://api.mobile.endomondo.com/mobile";
+    }
+
+    public Endomondo (String ApiUrl) {
+        this();
+    	EndomondoAPIUrl = ApiUrl;
+    }
+
+    public boolean Authenticate()
 	{
 
 		boolean result = false;
         Email = "arnipol@poczta.onet.pl";
-        Password = HtmEncoder("sp4xko#1");
-
+        Password = "sp4xko#1";
+        Password = UrlReader.HtmEncoder(Password);
 		String authUrl = String.format("%s/auth?deviceId=dummy&email=%s&password=%s&country=US&action=PAIR",
 			 EndomondoAPIUrl, this.Email, this.Password);
-		
+
 		String str = new String();
 		try {
 			str = UrlReader.readFromUrl(authUrl);
@@ -39,13 +52,13 @@ public class Endomondo {
 		{
 			String[] lines = str.split("\n");
 			if (lines[0].equals("OK") == false)
-			{				
+			{
 				// TODO: Error
 			}
 			else
 			{
 				for (String line: lines)
-				{			
+				{
 					String[] values = line.split("=");
 					if (values.length == 2)
 					{
@@ -72,7 +85,6 @@ public class Endomondo {
 		return result;
 	}
 
-    
     public WorkoutList ListWorkouts(int maxResults)
 	{
 		String listUrl = String.format("%s/api/workout/list?authToken=%s&maxResults=%s",
@@ -88,27 +100,6 @@ public class Endomondo {
     	WorkoutList workoutlist = jsonb.fromJson(str, WorkoutList.class);
         return workoutlist;
 	}
-    
-    
-    
-    
-    
-    
-	String HtmEncoder(String txt)
-    {
-          char[] _chars = new char[] { '!', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '{', '|', '}', '~' };
-          List<Character> chars = new ArrayList<>(); 
-          for (char c : _chars) chars.add(c);          
 
-          String[] charstr = new String[] { "%21", "%23", "%24", "%25", "%26", "%27", "%28", "%29", "%2A", "%2B", "%2C", "%2D", "%2E", "%2F", "%3A", "%3B", "%3C", "%3D", "%3E", "%3F", "0.4", "%7B", "%7C", "%7D", "%7E" };
-          String etxt = new String();
-          for (char c : txt.toCharArray())
-          {
 
-              int idx =  chars.indexOf(c);
-              if (idx >= 0) etxt += charstr[idx];
-              else etxt += c;
-          }
-          return etxt;
-    }
 }
